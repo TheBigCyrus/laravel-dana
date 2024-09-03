@@ -19,7 +19,7 @@ class SendNotification extends Notification
     public function __construct($msg, $chatId = null)
     {
         $this->message = is_string($msg) ? $msg : $msg->title . "\n" . $msg->content;
-        $this->chatId  = $chatId ?? "-4096043652"; //TODO add to config or env
+        $this->chatId  = $chatId ?? "-4096043652";
     }
 
     /**

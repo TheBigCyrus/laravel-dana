@@ -44,6 +44,7 @@ class BaseService
         else
         {
             self::sendSms($dest , $cache['code'] , $cache['name']);
+            Log::info($code);
         }
         self::createVerificationCode($dest , $code , $cache['name'] , $cache['type']);
     }

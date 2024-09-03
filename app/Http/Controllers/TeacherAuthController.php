@@ -47,7 +47,7 @@ class TeacherAuthController extends Controller
         VerificationService::set($value, $cacheValue, 10);
         VerificationService::sendCode($value, $field, $code);
 
-        return view('code', ['destination' => $value, 'action' => route('teacher.auth.code') , 'resend' => '/teacher/resend']);
+        return view('code', ['destination' => $value, 'action' => route('teacher.auth.code') , 'resend' => '/teacher/resendRegister']);
     }
 
     public function handleCode(CodeRequest $request)
@@ -133,11 +133,12 @@ class TeacherAuthController extends Controller
     public function handleResendRegister(resendRequest $request)
     {
         $result = VerificationService::get($request->input('destination'));
+
         $result = json_decode($result, true);
         $value = $request->input('destination') ;
         $code = VerificationService::generteCode();
         VerificationService::sendCode($value, $result['type'], $code);
-        $cacheValue = json_encode(['code' => $code, 'name' => $result['name'],'email' => $result['email'],'mobile' => $result['mobile'] ,'nationalCode' => $result['nationalCode'], 'type' => $result['type'] /*, 'ability' => $ability*/]);
+        $cacheValue = json_encode(['code' => $code, 'name' => $result['name'],'email' => $result['email'],'grade' => $result['grade'],'mobile' => $result['mobile'] ,'study' => $result['study'] ,'nationalCode' => $result['nationalCode'], 'type' => $result['type'] /*, 'ability' => $ability*/]);
         VerificationService::delete($request->input('destination'));
         VerificationService::set($value, $cacheValue, 2);
         return view('code', ['destination' => $value, 'action' => route('teacher.auth.code') , 'resend' => route('tar') ]);

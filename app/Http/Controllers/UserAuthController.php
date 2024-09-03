@@ -7,6 +7,7 @@ use App\Http\Requests\TicketRequest;
 use App\Http\Requests\UserAuth\CodeRequest;
 use App\Http\Requests\UserAuth\loginRequest;
 use App\Http\Requests\UserAuth\RegisterRequest;
+use App\Http\Requests\userLoginRequest;
 use App\Models\User;
 use App\Services\VerificationService;
 use Exception;
@@ -52,7 +53,7 @@ class UserAuthController extends Controller
     }
 
 
-    public function handleLogin(loginRequest $request)
+    public function handleLogin(userLoginRequest $request)
     {
         $field = $request->getField();
         $value = $request->getValue();

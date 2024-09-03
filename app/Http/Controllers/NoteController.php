@@ -32,7 +32,7 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO Validation
+
         $note = Note::create([
            'admin_id' => auth()->guard('admin')->id(),
            'title'    => $request->input('title', Str::random(10)),

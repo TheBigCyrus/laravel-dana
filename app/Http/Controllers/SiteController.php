@@ -103,7 +103,6 @@ if ($topic->reports == null){
             'link'    => ['url' => route('home'), 'title' => "برگشت به سایت"]
         ]);
     }
-
     public function handleProfileImage(Request $request)
     {
         $user = User::find(Auth::id());

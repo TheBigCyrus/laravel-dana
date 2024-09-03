@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Admin\ChangeStatusRequest;
 use App\Http\Requests\Admin\RegisterRequest;
 use App\Http\Requests\Admin\VerificationCodeRequest;
+use App\Http\Requests\LoginAdminRequest;
 use App\Http\Requests\resendRequest;
 use App\Models\Admin;
 use App\Models\Answer;
@@ -78,7 +79,8 @@ $ticket->save();
     }
     public function createCarousel(Request $request)
     {
-        $img = $request->file('image')->store(options: 'public');
+
+        $img = $request->file('image')->storeAs('' , $request->file('image')->originalName , 'public');
         Carousel::create([
                 'address' => $img ,
                 'type' => $request->input('type')
@@ -112,7 +114,7 @@ $ticket->save();
         return view('admin.edit_quiz')->with(['Questions' => $Questions , 'Answers' => $Answers]);
     }
 
-    public function handleLogin(RegisterRequest $request)
+    public function handleLogin(LoginAdminRequest $request)
     {
         if (auth()->guard('admin')->check()){
             return redirect('/admin/teachers/show/type/all');

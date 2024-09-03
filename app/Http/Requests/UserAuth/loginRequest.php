@@ -29,10 +29,10 @@ class loginRequest extends FormRequest
         ];
 
         if ($this->input('type') == 'email') {
-            $rules['email'] = ['required','email'];
+            $rules['email'] = ['required','email' , 'exists:teachers,email'];
         }
         elseif ($this->input('type') == 'mobile') {
-            $rules['mobile'] = ['required', new MobileRule()];
+            $rules['mobile'] = ['required', new MobileRule() , 'exists:teachers,mobile'];
         }
         return $rules;
     }
